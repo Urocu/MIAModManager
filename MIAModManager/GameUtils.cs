@@ -16,7 +16,7 @@ namespace MIAModManager
         {
             try
             {
-                string miAAppID = "1324340";
+                string miAAppID = "1324340"; //Steam app id for Made In Abyss.
                 string steamPath = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Valve\\Steam", "InstallPath", "");
                 if (steamPath == "")
                     throw new Exception("No Steam Installation Path Found.");
@@ -27,10 +27,10 @@ namespace MIAModManager
                     int appIDIndex = fileContents.IndexOf(miAAppID);
                     if (appIDIndex == -1)
                         throw new Exception("Game is not installed properly or is pirated.");
-                    Match match = Regex.Match(fileContents.Substring(0, appIDIndex), "\"path\"\\s+\"(.*?)\"", RegexOptions.RightToLeft);
-                    if (!match.Success)
+                    Match steamLibraryPath = Regex.Match(fileContents.Substring(0, appIDIndex), "\"path\"\\s+\"(.*?)\"", RegexOptions.RightToLeft);
+                    if (!steamLibraryPath.Success)
                         throw new Exception("Steam files are corrupted.");
-                    string gamePath = match.Groups[1].Value.Replace("\\\\", "\\") + "\\steamapps\\common\\MadeInAbyss-BSFD";
+                    string gamePath = steamLibraryPath.Groups[1].Value.Replace("\\\\", "\\") + "\\steamapps\\common\\MadeInAbyss-BSFD";
                     return gamePath;
                 }
             }
