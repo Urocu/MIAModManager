@@ -1,12 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MIAModManager
@@ -22,7 +16,7 @@ namespace MIAModManager
                 if (steamInstallDir == "")
                     throw new Exception("No Steam Installation Path Found.");
                 string steamGamePaths = Path.Combine(steamInstallDir, "steamapps", "libraryfolders.vdf");
-                using (StreamReader reader = new StreamReader(steamGamePaths))
+                using (StreamReader reader = new(steamGamePaths))
                 {
                     string line;
                     string dir = "";
