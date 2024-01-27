@@ -21,7 +21,8 @@ namespace MIAModManager
 
         private void Start_Game_Click(object sender, EventArgs e)
         {
-            string executablePath = GameUtils.GetGameRootDirectory() + "\\MadeInAbyss.exe";
+            string gameDir = GameUtils.GetGameRootDirectory();
+            string executablePath = Path.Combine(gameDir, "MadeInAbyss.exe");
             if (File.Exists(executablePath))
                 Process.Start(executablePath);
 
