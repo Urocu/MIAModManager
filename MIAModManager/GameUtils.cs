@@ -24,9 +24,9 @@ namespace MIAModManager
                         if (line.Contains("\\\\"))
                             dir = line.Split('"')[3].Replace("\\\\", "\\");
                         else if (line.Contains(MIA_STEAM_ID) && dir != "")
-                            break;
+                            return Path.Combine(dir, "steamapps", "common", "MadeInAbyss-BSFD");
                     }
-                    return dir;
+                    throw new Exception("No Game Installation Path Found.");
                 }
             }
             catch (Exception ex)
